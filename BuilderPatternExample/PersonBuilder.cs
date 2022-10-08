@@ -3,7 +3,7 @@
 public class PersonBuilder : IBuilder<Person>
 {
     private readonly Person _person;
-    
+
     public PersonBuilder()
     {
         _person = new Person
@@ -16,6 +16,7 @@ public class PersonBuilder : IBuilder<Person>
     {
         _person.FirstName = firstName;
         _person.LastName = lastName;
+
         return this;
     }
 
@@ -23,6 +24,7 @@ public class PersonBuilder : IBuilder<Person>
     {
         _person.BirthDate = birthDate;
         _person.Age = DateTime.Now.Year - birthDate.Year;
+
         return this;
     }
 
@@ -34,21 +36,25 @@ public class PersonBuilder : IBuilder<Person>
 
     public PersonBuilder AddHomePhone(string phoneNumber)
     {
-        _person.Phones?.Add(new Phone
-        {
-            PhoneType = PhoneType.Home,
-            PhoneNumber = phoneNumber
-        });
+        var phone = new PhoneBuilder()
+            .SetPhoneNumber(phoneNumber)
+            .SetPhoneType(PhoneType.Home)
+            .Build();
+
+        _person.Phones?.Add(phone);
+
         return this;
-    }   
-    
+    }
+
     public PersonBuilder AddMobilePhone(string phoneNumber)
     {
-        _person.Phones?.Add(new Phone
-        {
-            PhoneType = PhoneType.Mobile,
-            PhoneNumber = phoneNumber
-        });
+        var phone = new PhoneBuilder()
+             .SetPhoneNumber(phoneNumber)
+             .SetPhoneType(PhoneType.Mobile)
+             .Build();
+
+        _person.Phones?.Add(phone);
+
         return this;
     }
 

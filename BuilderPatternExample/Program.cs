@@ -1,45 +1,19 @@
 ﻿using System.Text.Json;
 using BuilderPatternExample;
 
-var p = new Person
-{
-    FirstName = "Juldhais",
-    LastName = "Hengkyawan",
-    BirthDate = new DateTime(1990, 7, 3),
-    Address = new Address
-    {
-        Line = "Jl. Dharmawangsa No. 10",
-        City = "Bogor",
-        Province = "Jawa Barat",
-        PostCode = "16131"
-    },
-    Phones = new List<Phone>
-    {
-        new Phone
-        {
-            PhoneNumber = "02518334455", 
-            PhoneType = PhoneType.Home
-        },
-        new Phone
-        {
-            PhoneNumber = "02518334455", 
-            PhoneType = PhoneType.Mobile
-        },
-    }
-};
-
 var person = new PersonBuilder()
-    .SetName("Juldhais", "Hengkyawan")
-    .SetBirthDate(new DateTime(1990, 7, 3))
-    .SetAddress(new Address
-    {
-        Line = "Jl. Dharmawangsa No. 10",
-        City = "Bogor",
-        Province = "Jawa Barat",
-        PostCode = "16131"
-    })
-    .AddHomePhone("02518334455")
-    .AddMobilePhone("081312345678")
+    .SetName("Hassan", "Gulzar")
+    .SetBirthDate(new DateTime(1983, 3, 8))
+    .SetAddress(new AddressBuilder()
+        .SetLine("Apartment 2114, Zakhir Tower 1")
+        .SetCity("Sharjah")
+        .SetProvince("Sharjah")
+        .SetPostCode("61105")
+        .Build())
+    .AddHomePhone("+971 6 543 1234")
+    .AddMobilePhone("+971 50 123 4567")
     .Build();
-    
+
 Console.WriteLine(JsonSerializer.Serialize(person));
+
+Console.ReadLine();
